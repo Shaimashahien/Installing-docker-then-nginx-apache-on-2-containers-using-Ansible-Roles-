@@ -1,0 +1,26 @@
+    - name: Install Docker
+      apt:
+        update_cache: yes
+        name: docker.io
+        state: present
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Start Docker service
+      systemd:
+        name: docker.service
+        enabled: true
+        state: started
+      notify: start docker
+
+    - name: Add user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Verify Docker installation
+      command: docker run hello-world

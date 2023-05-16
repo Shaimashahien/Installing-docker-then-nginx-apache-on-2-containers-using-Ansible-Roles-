@@ -1,0 +1,8 @@
+    - name: Install Nginx
+      docker_container:
+        name: nginx
+        image: nginx
+        exposed_ports:
+         - 80:80
+        state: started
+      notify: restart nginx

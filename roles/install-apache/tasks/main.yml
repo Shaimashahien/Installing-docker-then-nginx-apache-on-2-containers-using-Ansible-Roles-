@@ -1,0 +1,8 @@
+    - name: Install Apache
+      docker_container:
+        name: apache
+        image: httpd
+        exposed_ports:
+         - 81:80
+        state: started
+      notify: restart apache
